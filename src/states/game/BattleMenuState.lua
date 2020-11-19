@@ -10,7 +10,7 @@ BattleMenuState = Class{__includes = BaseState}
 
 function BattleMenuState:init(battleState)
     self.battleState = battleState
-    
+
     self.battleMenu = Menu {
         x = VIRTUAL_WIDTH - 64,
         y = VIRTUAL_HEIGHT - 64,
@@ -28,7 +28,7 @@ function BattleMenuState:init(battleState)
                 text = 'Run',
                 onSelect = function()
                     gSounds['run']:play()
-                    
+
                     -- pop battle menu
                     gStateStack:pop()
 
@@ -40,7 +40,7 @@ function BattleMenuState:init(battleState)
                         gStateStack:push(FadeInState({
                             r = 1, g = 1, b = 1
                         }, 1,
-                        
+
                         -- pop message and battle state and add a fade to blend in the field
                         function()
 
@@ -48,9 +48,17 @@ function BattleMenuState:init(battleState)
                             gSounds['field-music']:play()
 
                             -- pop message state
+                            -- LOL LOL so since this message is "false" the pop is not done inside
+                            -- hte state like would be in the other case where it needs uer input.
+                            -- this is quite wrong I think, lets confuse the programmer...
+
+                            -- this pop should be repsonsibility of the messagestate like was properly done
+                            -- in the other places.
                             gStateStack:pop()
 
                             -- pop battle state
+                            -- and this pop is also very confusing, why this menus should be the one responsible
+                            -- for popping the battle state??
                             gStateStack:pop()
 
                             gStateStack:push(FadeOutState({

@@ -40,10 +40,11 @@ function StartState:update(dt)
             gSounds['intro-music']:stop()
             self.tween:remove()
 
+            -- removes the start state.
             gStateStack:pop()
-            
+
             gStateStack:push(PlayState())
-            gStateStack:push(DialogueState("" .. 
+            gStateStack:push(DialogueState("" ..
                 "Welcome to the world of 50Mon! To start fighting monsters with your own randomly assigned" ..
                 " monster, just walk in the tall grass! If you need to heal, just press 'P' in the field! " ..
                 "Good luck! (Press Enter to dismiss dialogues)"

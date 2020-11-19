@@ -19,6 +19,8 @@ function Pokemon:init(def, level)
     self.baseDefense = def.baseDefense
     self.baseSpeed = def.baseSpeed
 
+    -- IV inidividual value.
+    -- the higher the state better chances to be above "dice roll" whihc will give you better stats
     self.HPIV = def.HPIV
     self.attackIV = def.attackIV
     self.defenseIV = def.defenseIV

@@ -43,6 +43,7 @@ function Textbox:nextChunks()
     end
 
     self.chunkCounter = self.chunkCounter + 3
+    -- 3 is teh number of lines, 3 lines every time we write.
 
     return chunks
 end
@@ -69,7 +70,7 @@ end
 
 function Textbox:render()
     self.panel:render()
-    
+
     love.graphics.setFont(self.font)
     for i = 1, #self.displayingChunks do
         love.graphics.print(self.displayingChunks[i], self.x + 3, self.y + 3 + (i - 1) * 16)

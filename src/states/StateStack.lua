@@ -13,6 +13,7 @@ function StateStack:init()
 end
 
 function StateStack:update(dt)
+    -- we are updating just the last pushes state
     self.states[#self.states]:update(dt)
 end
 
@@ -21,6 +22,7 @@ function StateStack:processAI(params, dt)
 end
 
 function StateStack:render()
+    -- render all the states.
     for i, state in ipairs(self.states) do
         state:render()
     end
@@ -37,5 +39,6 @@ end
 
 function StateStack:pop()
     self.states[#self.states]:exit()
+    -- on lua by default removing removes the last element.
     table.remove(self.states)
 end

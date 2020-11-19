@@ -11,7 +11,7 @@ EntityWalkState = Class{__includes = EntityBaseState}
 function EntityWalkState:init(entity, level)
     self.entity = entity
     self.level = level
-    
+
     self.canWalk = false
 end
 
@@ -47,20 +47,28 @@ function EntityWalkState:attemptMove()
     Timer.tween(0.5, {
         [self.entity] = {x = (toX - 1) * TILE_SIZE, y = (toY - 1) * TILE_SIZE - self.entity.height / 2}
     }):finish(function()
-        if love.keyboard.isDown('left') then
-            self.entity.direction = 'left'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('right') then
-            self.entity.direction = 'right'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('up') then
-            self.entity.direction = 'up'
-            self.entity:changeState('walk')
-        elseif love.keyboard.isDown('down') then
-            self.entity.direction = 'down'
-            self.entity:changeState('walk')
-        else
+        -- really not sure why you need this callback if this might be just
+        -- written the exact same on the place form where this was called in the first place.
+
+        -- maybe to avoid an iddle time in between the walkings, but I think it would be imperceptible.
+        --if love.keyboard.isDown('left') then
+        --    self.entity.direction = 'left'
+        --    self.entity:changeState('walk')
+        --elseif love.keyboard.isDown('right') then
+        --    self.entity.direction = 'right'
+        --    self.entity:changeState('walk')
+        --elseif love.keyboard.isDown('up') then
+        --    self.entity.direction = 'up'
+        --    self.entity:changeState('walk')
+        --elseif love.keyboard.isDown('down') then
+        --    self.entity.direction = 'down'
+        --    self.entity:changeState('walk')
+        --else
             self.entity:changeState('idle')
-        end
+        --end
+
+
+        -- confirm, it is imperceptible...... I don't understand the need to add code that does nothing
+        -- and just adds confusion.
     end)
 end

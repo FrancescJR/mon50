@@ -26,6 +26,21 @@ function Level:init()
         height = 16,
     }
 
+    -- I trully dont udnerstand this. why to create a "NEW" state everytime you change
+    -- state, you will end up with thousands of states, taking into account that a walk state
+    -- equls a 1 tile movement, there's an idle + walk state per every move...
+
+    -- maybe it just OK, we are just creating a new one, the old one probably gets deleted
+    -- never able to get it back. But it's hard to know what exactly needs to work
+    -- especially with this checking stuff if grass or not etc, for example it needs
+    -- a "Level" the PlayerWalkState, pretty much we are binding player which has a state stateMachine
+    -- with a state that needs Level to Level. Player needs to be inside level.
+
+    -- the stack state makes sense just for that, at least you keep deleting them when they-re not
+    -- in use.
+
+    -- another bad things, defining all of the attriutes of player here instead of on the class "PLayer"....
+    -- well they are explained in "Enttiy" which palyer extends from, mmmh ok.
     self.player.stateMachine = StateMachine {
         ['walk'] = function() return PlayerWalkState(self.player, self) end,
         ['idle'] = function() return PlayerIdleState(self.player) end
