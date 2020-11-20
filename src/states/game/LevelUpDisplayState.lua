@@ -1,7 +1,9 @@
 LevelUpDisplayState = Class{__includes = BaseState}
 
-function LevelUpDisplayState:init(pokemon, hpIncrease, attackIncrease, defenseIncrease, speedIncrease)
-print_r(pokemon)
+function LevelUpDisplayState:init(pokemon, hpIncrease, attackIncrease, defenseIncrease, speedIncrease, onAcknowledged)
+
+    self.onAcknowledged = onAcknowledged or function() end
+
     self.levelUpDisplay = AcknowledgeMenu {
         x = VIRTUAL_WIDTH / 2 - 64,
         y = 32,
@@ -28,13 +30,14 @@ print_r(pokemon)
 end
 
 function LevelUpDisplayState:update(dt)
-    self.levelUpDisplay:update(dt)
-    if self.levelUpDisplay:isAcknowledged() then
+    if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
         gStateStack:pop()
+        self.onAcknowledged()
     end
 end
 
 function LevelUpDisplayState:render()
+    love.graphics.setFont(gFonts['small'])
     self.levelUpDisplay:render()
 end
 

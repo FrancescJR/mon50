@@ -16,11 +16,3 @@ function AcknowledgeMenu:render()
     self.panel:render()
     self.selection:render()
 end
-
-function AcknowledgeMenu:isAcknowledged()
-    return self.selection.acknowledged;
-end
-
-function AcknowledgeMenu:update(dt)
-    self.selection:update(dt)
-end

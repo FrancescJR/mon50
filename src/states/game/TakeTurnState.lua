@@ -200,7 +200,7 @@ function TakeTurnState:victory()
             -- sum all IVs and multiply by level to get exp amount
             local exp = (self.opponentPokemon.HPIV + self.opponentPokemon.attackIV +
                 self.opponentPokemon.defenseIV + self.opponentPokemon.speedIV) * self.opponentPokemon.level
-
+            exp =200
             gStateStack:push(BattleMessageState('You earned ' .. tostring(exp) .. ' experience points!',
                 function() end, false))
 -- OMG this false, this option, the devil is behind this.
@@ -230,16 +230,23 @@ function TakeTurnState:victory()
 
                         gStateStack:push(BattleMessageState('Congratulations! Level Up!',
                         function()
-                            gStateStack:push(LevelUpDisplayState(statsIncrease))
-                            -- place to code the assignment.
+
+                            --since the fade in execute rigth away,
+                            -- I have to stop it from executing somehow
+                            -- I am quite sure this is a bad design
+                            -- you can "stack" and stack something on top, because the
+                            -- fade in/out will tweening will happen even when not being
+                            -- the one on top of the stack.
                             gStateStack:push(LevelUpDisplayState(
                                     self.playerPokemon,
                                     HPIncrease,
                                     attackIncrease,
                                     defenseIncrease,
                                     speedIncrease
+                            , function()
+                                self:fadeOutWhite()
+                                end
                             ))
-                            self:fadeOutWhite()
                         end))
                     else
                         self:fadeOutWhite()

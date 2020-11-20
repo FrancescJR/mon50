@@ -10,15 +10,8 @@ function DisabledSelection:init(def)
     self.font = def.font or gFonts['small']
 
     self.gapHeight = self.height / #self.items
-
-    self.acknowledged = false
 end
 
-function DisabledSelection:update(dt)
-   if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
-       self.acknowledged = true
-    end
-end
 
 function DisabledSelection:render()
     local currentY = self.y
