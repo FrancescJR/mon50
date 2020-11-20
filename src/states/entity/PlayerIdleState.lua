@@ -11,6 +11,7 @@ PlayerIdleState = Class{__includes = EntityIdleState}
 function PlayerIdleState:update(dt)
     if love.keyboard.isDown('left') then
         self.entity.direction = 'left'
+        print("once")
         self.entity:changeState('walk')
     elseif love.keyboard.isDown('right') then
         self.entity.direction = 'right'

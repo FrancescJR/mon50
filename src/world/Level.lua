@@ -41,6 +41,10 @@ function Level:init()
 
     -- another bad things, defining all of the attriutes of player here instead of on the class "PLayer"....
     -- well they are explained in "Enttiy" which palyer extends from, mmmh ok.
+    -- the "small" detail that is not defined in either entity nor plater is
+    -- the STATE MACHINE ITSELF!!!, everything is relying on updating this player.stateMachine
+    -- and if you forget to attach it here in this random place where youc reate player,
+    -- you are f*ckd
     self.player.stateMachine = StateMachine {
         ['walk'] = function() return PlayerWalkState(self.player, self) end,
         ['idle'] = function() return PlayerIdleState(self.player) end
