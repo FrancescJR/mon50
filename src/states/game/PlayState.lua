@@ -31,6 +31,7 @@ function PlayState:update(dt)
             -- why do you need this, if the point of the lecture os that with the stack gStateStack
             -- you dont need to control stuff in teh update, since the update will only affect
             -- the active state, which at this point is not this play state...
+
             --self.dialogueOpened = false
 
             -- confirm, comenting and deleting this dialogueOpened does not affect the game....

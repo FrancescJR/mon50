@@ -33,8 +33,7 @@ function EntityWalkState:attemptMove()
     else
         toY = toY + 1
     end
-print(toX)
-    print(toY)
+
     -- break out if we try to move out of the map boundaries
     if toX < 1 or toX > 24 or toY < 1 or toY > 13 then
         self.entity:changeState('idle')
